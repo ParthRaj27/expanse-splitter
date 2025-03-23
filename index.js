@@ -7,6 +7,7 @@ const app = express();
 var cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.set("view engine", "ejs");
+app.use(express.static("public"));
 const port =  process.env.port;
 
 app.use("/", authroutes)

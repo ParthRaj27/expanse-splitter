@@ -13,10 +13,11 @@ const fetchuser = (req, res, next) => {
     // });
   }
   try {
-    const data = jwt.verify(token, JWT_SECRET, (err, decode) => {
+    const data = jwt.verify(token, JWT_SECRET, (err, decoded) => {
       if (err) {
         return res.redirect('/login')
       } else {
+        req.user = decoded;
         next();
       }
     });

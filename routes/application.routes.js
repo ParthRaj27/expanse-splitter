@@ -5,7 +5,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json())
 const multer = require("multer");
 const fetchuser = require("../middleware/auth.middleware");
-const { getdashboard } = require("../controller/application.controller");
+const { getdashboard, getpersonalexpanse, postcreateexpanse, getUserExpenses } = require("../controller/application.controller");
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, "./public/uploads/");
@@ -18,5 +18,7 @@ const storage = multer.diskStorage({
   });
   const upload = multer({ storage: storage });
 router.get("/dashboard",fetchuser,getdashboard);
-
+router.get("/personal-expanse",fetchuser,getpersonalexpanse)
+router.post("/expanse-create",fetchuser,upload.none(),postcreateexpanse)
+router.get("/expenses", fetchuser, getUserExpenses); 
 module.exports = router;

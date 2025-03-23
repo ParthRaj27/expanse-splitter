@@ -68,7 +68,8 @@ exports.postlogin = async (req, res) => {
         }
 
         const data = {
-            fname: user.fname, // Use user object instead of result[0]
+            id:user._id,
+            fname: user.fname,
             lname: user.lname,
             email: user.email,
         };
