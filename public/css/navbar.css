@@ -1,0 +1,35 @@
+body {
+    transition: 0.3s ease-in-out;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: none;
+    z-index: 998;
+}
+
+.overlay.active {
+    display: block;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: #f8f9fa;
+    transition: left 0.3s ease-in-out;
+    padding-top: 20px;
+    z-index: 999;
+}
+
+.sidebar.active {
+    left: 0;
+}

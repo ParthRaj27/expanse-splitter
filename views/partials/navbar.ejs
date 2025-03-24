@@ -1,4 +1,15 @@
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <button class="btn btn-dark" id="openSidebar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <button class="btn btn-danger" id="logoutBtn">Logout</button>
+    </div>
+</nav>
+
 <div class="overlay" id="overlay"></div>
+
 <div class="sidebar" id="sidebar">
     <button class="btn btn-danger ms-3" id="closeSidebar">Close</button>
     <ul class="nav flex-column mt-3 ms-3">
@@ -12,7 +23,10 @@
             <a class="nav-link" href="/application/common-expense">Create Common expense</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/application/expenses">View your expanse</a>
+            <a class="nav-link" href="/application/expenses">View your expense</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/application/show-your-common-expanse">Show your common expenses</a>
         </li>
     </ul>
 </div>

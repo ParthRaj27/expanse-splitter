@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <script src="/js/navbar.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Expenses</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include("../partials/navbar") %>
+    <div class="container mt-5">
+        <h2 class="mb-4">Common Expenses</h2>
+    
+        <div class="row">
+            <% expenses.forEach(expense => { %>
+                <div class="col-md-4">
+                    <div class="card mb-3" onclick="editExpense('<%= expense._id %>')" style="cursor: pointer;">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= expense.description %></h5>
+                            <p class="card-text"><strong>Price:</strong> ₹<%= expense.price %></p>
+                            <p class="card-text"><strong>Created At:</strong> <%= new Date(expense.createdAt).toLocaleString() %></p>
+                            <p class="card-text"><strong>Users Involved:</strong></p>
+                            <ul class="list-group list-group-flush">
+                                <% expense.userIds.forEach(user => { %>
+                                    <li class="list-group-item"><%= user.fname %> (<%= user.email %>)</li>
+                                <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/navbar.js"></script>
+<script>
+    function editExpense(expenseId) {
+        window.location.href = "/application/edit-expense/" + expenseId;
+    }
+</script>
+</html>

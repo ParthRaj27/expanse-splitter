@@ -1,50 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <script src="/js/navbar.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Form with Sidebar</title>
+    <title>Common Expenses</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            transition: 0.3s ease-in-out;
-        }
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(5px);
-            display: none;
-            z-index: 998;
-        }
-        .overlay.active {
-            display: block;
-        }
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background: #f8f9fa;
-            transition: left 0.3s ease-in-out;
-            padding-top: 20px;
-            z-index: 999;
-        }
-        .sidebar.active {
-            left: 0;
-        }
-    </style>
 </head>
+
 <body>
     <%- include("../partials/navbar") %>
-    <%- include("../partials/showingnavbar") %>
-    
-    <script src="/js/navbar.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <div class="container mt-5">
+            <h2 class="mb-4">Common Expenses</h2>
+
+            <div class="row">
+                <% expenses.forEach(expense=> { %>
+                    <div class="col-md-4">
+                        <div class="card mb-3" onclick="editExpense('<%= expense._id %>')" style="cursor: pointer;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <%= expense.description %>
+                                </h5>
+                                <p class="card-text"><strong>Price:</strong> ₹<%= expense.price %>
+                                </p>
+                                <p class="card-text"><strong>Created At:</strong>
+                                    <%= new Date(expense.createdAt).toLocaleString() %>
+                                </p>
+                                <p class="card-text"><strong>Users Involved:</strong></p>
+                                <ul class="list-group list-group-flush">
+                                    <% expense.userIds.forEach(user=> { %>
+                                        <li class="list-group-item">
+                                            <%= user.fname %> (<%= user.email %>)
+                                        </li>
+                                        <% }) %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
 </body>
+
+<script>
+    function editExpense(expenseId) {
+        window.location.href = "/application/edit-expense/" + expenseId;
+    }
+</script>
+
 </html>

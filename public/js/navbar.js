@@ -1,15 +1,33 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const openSidebar = document.getElementById("openSidebar");
+    const closeSidebar = document.getElementById("closeSidebar");
+    const overlay = document.getElementById("overlay");
+    const sidebar = document.getElementById("sidebar");
 
-document.getElementById("openSidebar").addEventListener("click", function () {
-    document.getElementById("sidebar").classList.add("active");
-    document.getElementById("overlay").classList.add("active");
-});
+    openSidebar.addEventListener("click", function () {
+        sidebar.classList.add("active");
+        overlay.classList.add("active");
+    });
 
-document.getElementById("closeSidebar").addEventListener("click", function () {
-    document.getElementById("sidebar").classList.remove("active");
-    document.getElementById("overlay").classList.remove("active");
-});
+    closeSidebar.addEventListener("click", function () {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+    });
 
-document.getElementById("overlay").addEventListener("click", function () {
-    document.getElementById("sidebar").classList.remove("active");
-    document.getElementById("overlay").classList.remove("active");
+    overlay.addEventListener("click", function () {
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+    });
+
+    
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+        let response = await fetch("/application/logout", { method: "POST" });
+        let result = await response.json();
+        if (result.success) {
+            alert(result.message);
+            window.location.href = "/login";
+        } else {
+            alert("Logout failed!");
+        }
+    });
 });
